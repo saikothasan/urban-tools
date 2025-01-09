@@ -6,6 +6,12 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import Papa from 'papaparse'
 
+interface ParseResult<T> {
+  data: T[]
+  errors: Papa.ParseError[]
+  meta: Papa.ParseMeta
+}
+
 export function TSVToJSONForm() {
   const [input, setInput] = useState("")
   const [output, setOutput] = useState("")
@@ -13,23 +19,18 @@ export function TSVToJSONForm() {
   const [hasHeader, setHasHeader] = useState(true)
 
   const handleConvert = () => {
-    try {
-      Papa.parse(input, {
-        delimiter: '\t',
-        header: hasHeader,
-        complete: (results) => {
-          setOutput(JSON.stringify(results.data, null, 2))
-          setError(null)
-        },
-        error: (error) => {
-          setError(`Error parsing TSV: ${error.message}`)
-          setOutput("")
-        }
-      })
-    } catch (err) {
-      setError("Invalid TSV: Please check your input and try again.")
-      setOutput("")
-    }
+    Papa.parse<Record<string, unknown>>(input, {
+      delimiter: '\t',
+      header: hasHeader,
+      complete: (results: ParseResult<Record<string, unknown>>) => {
+        setOutput(JSON.stringify(results.data, null, 2))
+        setError(null)
+      },
+      error: (error: Error) => {
+        setError(`Error parsing TSV: ${error.message}`)
+        setOutput("")
+      }
+    })
   }
 
   return (
@@ -45,7 +46,7 @@ export function TSVToJSONForm() {
         <Checkbox
           id="hasHeader"
           checked={hasHeader}
-          onCheckedChange={(checked) => setHasHeader(checked as boolean)}
+          onCheckedChange={(checked) => setHasHeader(checked === true)}
         />
         <label htmlFor="hasHeader">TSV has header row</label>
       </div>
