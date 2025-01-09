@@ -16,8 +16,7 @@ export function SQLFormatterForm() {
       const formatted = format(input, {
         language: dialect as any, // Type assertion as the library types might not be up to date
         uppercase: true,
-        indentStyle: 'spaces',
-        spaces: 2
+        indent: '  ' // Use two spaces for indentation
       })
       setOutput(formatted)
     } catch (error) {
