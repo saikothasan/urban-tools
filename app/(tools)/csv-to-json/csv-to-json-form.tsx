@@ -6,6 +6,12 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import Papa from 'papaparse'
 
+interface ParseResult {
+  data: any[]
+  errors: Papa.ParseError[]
+  meta: Papa.ParseMeta
+}
+
 export function CSVToJSONForm() {
   const [input, setInput] = useState("")
   const [output, setOutput] = useState("")
@@ -14,9 +20,9 @@ export function CSVToJSONForm() {
 
   const handleConvert = () => {
     try {
-      Papa.parse(input, {
+      Papa.parse<any>(input, {
         header: hasHeader,
-        complete: (results) => {
+        complete: (results: ParseResult) => {
           setOutput(JSON.stringify(results.data, null, 2))
           setError(null)
         },
