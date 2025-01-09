@@ -29,6 +29,10 @@ const tools = [
   { name: "JSON to CSV", description: "Convert JSON data to CSV format", path: "/json-to-csv" },
   { name: "JSON to Text", description: "Convert JSON data to plain text", path: "/json-to-text" },
   { name: "JSON to TSV", description: "Convert JSON data to TSV format", path: "/json-to-tsv" },
+  { name: "UUID Generator", description: "Generate UUIDs (Universally Unique Identifiers)", path: "/uuid-generator" },
+  { name: "Diff Checker", description: "Compare and highlight differences between two texts", path: "/diff-checker" },
+  { name: "Markdown to HTML", description: "Convert Markdown syntax to HTML", path: "/markdown-to-html" },
+  { name: "Hash Generator", description: "Generate various types of hashes using crypto-js", path: "/hash-generator" },
 ]
 
 export default function Home() {
