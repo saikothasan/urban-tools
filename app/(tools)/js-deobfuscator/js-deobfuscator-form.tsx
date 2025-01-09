@@ -48,7 +48,7 @@ export function JSDeObfuscatorForm() {
       // Parse the input JavaScript
       const ast = esprima.parseScript(input)
 
-      let deobfuscatedAst = ast
+      let deobfuscatedAst: any = ast
       const analysisSteps: string[] = []
 
       // Apply deobfuscation techniques based on selected options
@@ -107,9 +107,9 @@ export function JSDeObfuscatorForm() {
     }
   }
 
-  const decodeStrings = (ast: any) => {
+  const decodeStrings = (ast: any): any => {
     return estraverse.replace(ast, {
-      enter: function (node) {
+      enter: function (node: any) {
         if (node.type === 'CallExpression' && node.callee.type === 'Identifier' && node.callee.name === 'atob') {
           if (node.arguments[0].type === 'Literal') {
             return {
@@ -123,13 +123,13 @@ export function JSDeObfuscatorForm() {
     })
   }
 
-  const foldConstants = (ast: any) => {
+  const foldConstants = (ast: any): any => {
     return estraverse.replace(ast, {
-      leave: function (node) {
+      leave: function (node: any) {
         if (node.type === 'BinaryExpression' && node.left.type === 'Literal' && node.right.type === 'Literal') {
           const left = node.left.value
           const right = node.right.value
-          let result
+          let result: number
 
           switch (node.operator) {
             case '+': result = left + right; break
@@ -149,27 +149,27 @@ export function JSDeObfuscatorForm() {
     })
   }
 
-  const simplifyExpressions = (ast: any) => {
+  const simplifyExpressions = (ast: any): any => {
     return esmangle.optimize(ast)
   }
 
-  const removeDeadCode = (ast: any) => {
+  const removeDeadCode = (ast: any): any => {
     return esmangle.optimize(ast, [
       [esmangle.pass.Registry.pass.deadcode.transformations]
     ])
   }
 
-  const renameVariables = (ast: any) => {
+  const renameVariables = (ast: any): any => {
     let counter = 0
-    const variableMap = new Map()
+    const variableMap = new Map<string, string>()
 
     return estraverse.replace(ast, {
-      enter: function (node) {
+      enter: function (node: any) {
         if (node.type === 'Identifier' && !variableMap.has(node.name)) {
           variableMap.set(node.name, `v${counter++}`)
         }
       },
-      leave: function (node) {
+      leave: function (node: any) {
         if (node.type === 'Identifier' && variableMap.has(node.name)) {
           return {
             ...node,
