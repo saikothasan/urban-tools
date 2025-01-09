@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { css_beautify } from 'js-beautify'
+import { css as css_beautify } from 'js-beautify'
 
 export function CSSBeautifierForm() {
   const [input, setInput] = useState("")
