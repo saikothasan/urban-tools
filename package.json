@@ -79,6 +79,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/react-json-editor-ajrm": "^2.5.6",
     "@types/escodegen": "^0.0.7",
     "@types/crypto-js": "^4.1.1",
     "@types/esprima": "^4.0.3",
