@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import dynamic from 'next/dynamic'
 import { AlertCircle } from 'lucide-react'
+import localeEn from 'react-json-editor-ajrm/locale/en'
 
 const JSONEditor = dynamic(() => import('react-json-editor-ajrm').then(mod => mod.default), { ssr: false })
 
@@ -50,7 +51,7 @@ export function JSONEditorForm() {
             id="json-editor"
             placeholder={jsonData}
             onChange={handleJsonChange}
-            locale={undefined}
+            locale={localeEn}
             height="300px"
             width="100%"
           />
