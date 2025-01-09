@@ -3,15 +3,16 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { minify } from 'terser'
+import { minify, MinifyOptions } from 'terser'
 
 export function JSMinifierForm() {
   const [input, setInput] = useState("")
   const [output, setOutput] = useState("")
+  const [error, setError] = useState<string | null>(null)
 
   const handleMinify = async () => {
     try {
-      const result = await minify(input, {
+      const options: MinifyOptions = {
         mangle: true,
         compress: {
           dead_code: true,
@@ -26,14 +27,17 @@ export function JSMinifierForm() {
           hoist_vars: true,
           if_return: true,
           join_vars: true,
-          cascade: true,
           side_effects: true,
           warnings: false,
         },
-      })
+      }
+
+      const result = await minify(input, options)
       setOutput(result.code || "")
-    } catch (error) {
-      setOutput("Error: Invalid JavaScript")
+      setError(null)
+    } catch (err) {
+      setError("Error: Invalid JavaScript or minification failed")
+      setOutput("")
     }
   }
 
@@ -47,6 +51,9 @@ export function JSMinifierForm() {
         className="w-full font-mono"
       />
       <Button onClick={handleMinify} className="w-full">Minify</Button>
+      {error && (
+        <div className="text-red-500 mt-2">{error}</div>
+      )}
       <Textarea
         placeholder="Minified JavaScript will appear here"
         value={output}
