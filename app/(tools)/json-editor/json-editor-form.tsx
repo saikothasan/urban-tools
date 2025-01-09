@@ -2,64 +2,105 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import dynamic from 'next/dynamic'
+import { AlertCircle } from 'lucide-react'
+
+const JSONEditor = dynamic(() => import('react-json-editor-ajrm').then(mod => mod.default), { ssr: false })
+
+interface JSONEditorProps {
+  id: string
+  placeholder: any
+  locale: any
+  height: string
+  width: string
+}
 
 export function JSONEditorForm() {
-  const [input, setInput] = useState("")
-  const [output, setOutput] = useState("")
+  const [jsonData, setJsonData] = useState<any>({})
+  const [formattedJson, setFormattedJson] = useState("")
+  const [minifiedJson, setMinifiedJson] = useState("")
   const [error, setError] = useState<string | null>(null)
 
-  const handleFormat = () => {
-    try {
-      const parsed = JSON.parse(input)
-      const formatted = JSON.stringify(parsed, null, 2)
-      setOutput(formatted)
+  const handleJsonChange = (data: { jsObject: any; json: string; error: any }) => {
+    if (data.error) {
+      setError(data.error.reason)
+    } else {
       setError(null)
-    } catch (err) {
-      setError("Invalid JSON: Please check your input and try again.")
-      setOutput("")
+      setJsonData(data.jsObject)
+      setFormattedJson(JSON.stringify(data.jsObject, null, 2))
+      setMinifiedJson(JSON.stringify(data.jsObject))
     }
   }
 
-  const handleMinify = () => {
-    try {
-      const parsed = JSON.parse(input)
-      const minified = JSON.stringify(parsed)
-      setOutput(minified)
-      setError(null)
-    } catch (err) {
-      setError("Invalid JSON: Please check your input and try again.")
-      setOutput("")
-    }
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
   }
 
   return (
     <div className="space-y-4">
-      <Textarea
-        placeholder="Enter JSON data here"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        rows={10}
-        className="w-full font-mono"
-      />
-      <div className="flex space-x-2">
-        <Button onClick={handleFormat} className="flex-grow">Format JSON</Button>
-        <Button onClick={handleMinify} className="flex-grow">Minify JSON</Button>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>JSON Editor</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <JSONEditor
+            id="json-editor"
+            placeholder={jsonData}
+            onChange={handleJsonChange}
+            locale={undefined}
+            height="300px"
+            width="100%"
+          />
+        </CardContent>
+      </Card>
+
       {error && (
         <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
-      <Textarea
-        placeholder="Formatted or minified JSON will appear here"
-        value={output}
-        readOnly
-        rows={10}
-        className="w-full font-mono"
-      />
+
+      <Tabs defaultValue="formatted" className="w-full">
+        <TabsList>
+          <TabsTrigger value="formatted">Formatted</TabsTrigger>
+          <TabsTrigger value="minified">Minified</TabsTrigger>
+        </TabsList>
+        <TabsContent value="formatted">
+          <Card>
+            <CardHeader>
+              <CardTitle>Formatted JSON</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <pre className="bg-secondary p-4 rounded-md overflow-x-auto">
+                {formattedJson}
+              </pre>
+              <Button onClick={() => copyToClipboard(formattedJson)} className="mt-2">
+                Copy Formatted JSON
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="minified">
+          <Card>
+            <CardHeader>
+              <CardTitle>Minified JSON</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <pre className="bg-secondary p-4 rounded-md overflow-x-auto">
+                {minifiedJson}
+              </pre>
+              <Button onClick={() => copyToClipboard(minifiedJson)} className="mt-2">
+                Copy Minified JSON
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
