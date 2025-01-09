@@ -14,7 +14,7 @@ export const metadata = {
   title: 'Online Developer Tools',
   description: 'A collection of useful online tools for developers',
   verification: {
-    google: 'YOUR_GOOGLE_SITE_VERIFICATION_CODE',
+    google: 'Sbfx36AwCwEHYjToOifCyG__NTdz9sPGgLnjuBHUQkM',
     yandex: 'YOUR_YANDEX_SITE_VERIFICATION_CODE',
     bing: 'YOUR_BING_SITE_VERIFICATION_CODE',
   },
