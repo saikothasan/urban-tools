@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DevTools - Online Developer Tools
 
-## Getting Started
+A comprehensive collection of web development tools and utilities built with Next.js 13, React, and Tailwind CSS.
 
-First, run the development server:
+## 🚀 Features
 
+- **40+ Developer Tools** including:
+  - Code Formatters (HTML, CSS, JavaScript, SQL)
+  - Code Minifiers
+  - Encoders/Decoders (Base64, URL, HTML)
+  - Converters (JSON, XML, CSV, TSV)
+  - Generators (UUID, Password, QR Code, Lorem Ipsum)
+  - And many more...
+- **Modern UI** with dark mode support
+- **Responsive Design** that works on all devices
+- **No Registration Required** - all tools are freely accessible
+- **Privacy Focused** - all processing happens in the browser
+
+## 🛠️ Tech Stack
+
+- [Next.js 13](https://nextjs.org/) - React Framework
+- [React](https://reactjs.org/) - UI Library
+- [Tailwind CSS](https://tailwindcss.com/) - CSS Framework
+- [shadcn/ui](https://ui.shadcn.com/) - UI Components
+- [TypeScript](https://www.typescriptlang.org/) - Type Safety
+- Various utility libraries for specific tools
+
+## 📦 Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/saikothasan/urban-tools.git
+cd urban-tools
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Learn More
+## 🔧 Available Tools
 
-To learn more about Next.js, take a look at the following resources:
+- **HTML Tools**
+  - HTML Decoder
+  - HTML Encoder
+  - HTML Beautifier
+  - HTML Minifier
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **CSS Tools**
+  - CSS Beautifier
+  - CSS Minifier
+  - CSS Grid Generator
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **JavaScript Tools**
+  - JS Beautifier
+  - JS Minifier
+  - JS Obfuscator
+  - JS Deobfuscator
 
-## Deploy on Vercel
+- **JSON Tools**
+  - JSON Viewer
+  - JSON Formatter
+  - JSON Validator
+  - JSON Editor
+  - JSON Minify
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Converters**
+  - XML to JSON
+  - JSON to XML
+  - CSV to JSON
+  - JSON to CSV
+  - TSV to JSON
+  - JSON to TSV
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Encoders/Decoders**
+  - Base64 Tool
+  - URL Encoder/Decoder
+  - JWT Decoder
+
+- **Generators**
+  - Lorem Ipsum Generator
+  - UUID Generator
+  - Password Generator
+  - QR Code Generator
+  - Hash Generator
+
+- **Other Tools**
+  - Markdown to HTML
+  - Regex Tester
+  - Color Palette Generator
+  - Cron Expression Generator
+  - Diff Checker
+  - SQL Formatter
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🌟 Support
+
+If you find this project useful, please consider giving it a star on GitHub! ⭐
+
+## 📧 Contact
+
+For any queries or suggestions, please feel free to open an issue or reach out through the contact form on the website.
+
+---
+
+Made with ❤️ by [saikothasan](https://github.com/saikothasan)
