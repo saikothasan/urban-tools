@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { ToolLayout, generateMetadata } from '@/components/tool-layout'
-import JSONViewerForm from './json-viewer-form'
+import { JSONViewerForm } from './json-viewer-form'
 
 const title = 'JSON Viewer Tool'
 const description = 'Visualize and navigate through JSON data with our free online JSON Viewer tool.'
@@ -17,7 +17,7 @@ export default function JSONViewerPage() {
         "Interactive tree view for JSON data",
         "Expandable and collapsible nodes",
         "Syntax highlighting for better readability",
-        "Copy individual node values or entire JSON",
+        "Easy-to-use interface suitable for all users",
         "Free to use with no registration required"
       ]}
       faqs={[

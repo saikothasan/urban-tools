@@ -3,29 +3,63 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import dynamic from 'next/dynamic'
-
-const JSONEditor = dynamic(() => import('jsoneditor-react').then((mod) => mod.JSONEditor), { ssr: false })
-import 'jsoneditor-react/es/editor.min.css'
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 export function JSONEditorForm() {
-  const [json, setJson] = useState<any>({})
+  const [input, setInput] = useState("")
+  const [output, setOutput] = useState("")
+  const [error, setError] = useState<string | null>(null)
 
-  const handleChange = (newJson: any) => {
-    setJson(newJson)
+  const handleFormat = () => {
+    try {
+      const parsed = JSON.parse(input)
+      const formatted = JSON.stringify(parsed, null, 2)
+      setOutput(formatted)
+      setError(null)
+    } catch (err) {
+      setError("Invalid JSON: Please check your input and try again.")
+      setOutput("")
+    }
+  }
+
+  const handleMinify = () => {
+    try {
+      const parsed = JSON.parse(input)
+      const minified = JSON.stringify(parsed)
+      setOutput(minified)
+      setError(null)
+    } catch (err) {
+      setError("Invalid JSON: Please check your input and try again.")
+      setOutput("")
+    }
   }
 
   return (
     <div className="space-y-4">
-      <div className="h-[500px] border rounded">
-        <JSONEditor
-          value={json}
-          onChange={handleChange}
-          mode="tree"
-          allowedModes={['tree', 'code']}
-        />
+      <Textarea
+        placeholder="Enter JSON data here"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        rows={10}
+        className="w-full font-mono"
+      />
+      <div className="flex space-x-2">
+        <Button onClick={handleFormat} className="flex-grow">Format JSON</Button>
+        <Button onClick={handleMinify} className="flex-grow">Minify JSON</Button>
       </div>
-      <Button onClick={() => console.log(json)} className="w-full">Log JSON to Console</Button>
+      {error && (
+        <Alert variant="destructive">
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+      <Textarea
+        placeholder="Formatted or minified JSON will appear here"
+        value={output}
+        readOnly
+        rows={10}
+        className="w-full font-mono"
+      />
     </div>
   )
 }

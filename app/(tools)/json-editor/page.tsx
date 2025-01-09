@@ -12,12 +12,12 @@ export default function JSONEditorPage() {
     <ToolLayout
       title={title}
       description={description}
-      about="Our JSON Editor tool provides an interactive interface for editing and manipulating JSON data. It combines the functionality of a text editor with a structured view, making it easy to modify complex JSON structures."
+      about="Our JSON Editor tool provides an interface for editing and manipulating JSON data. It allows you to format, minify, and validate your JSON with ease."
       features={[
-        "Interactive tree view for editing JSON",
-        "Text-based editing with syntax highlighting",
-        "Add, edit, and delete JSON properties and values",
+        "Format JSON with proper indentation",
+        "Minify JSON to reduce file size",
         "Validate JSON as you type",
+        "Easy-to-use interface suitable for all users",
         "Free to use with no registration required"
       ]}
       faqs={[
@@ -31,7 +31,7 @@ export default function JSONEditorPage() {
         },
         {
           question: "Can I undo changes in the editor?",
-          answer: "Yes, the editor supports undo and redo operations for both the tree view and text-based editing."
+          answer: "The editor uses a standard textarea, so you can use the browser's built-in undo functionality (usually Ctrl+Z or Cmd+Z)."
         }
       ]}
     >

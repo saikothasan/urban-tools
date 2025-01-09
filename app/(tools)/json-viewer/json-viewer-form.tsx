@@ -3,13 +3,41 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import dynamic from 'next/dynamic'
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
-const ReactJson = dynamic(() => import('react-json-view'), { ssr: false })
+type JSONValue = string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue }
 
-export default function JSONViewerForm() {
+const JSONTree: React.FC<{ data: JSONValue; indent?: number }> = ({ data, indent = 0 }) => {
+  const [isExpanded, setIsExpanded] = useState(true)
+
+  if (typeof data !== 'object' || data === null) {
+    return <span className="ml-4">{JSON.stringify(data)}</span>
+  }
+
+  const isArray = Array.isArray(data)
+
+  return (
+    <div style={{ marginLeft: `${indent * 20}px` }}>
+      <span onClick={() => setIsExpanded(!isExpanded)} style={{ cursor: 'pointer' }}>
+        {isExpanded ? '▼' : '►'} {isArray ? '[]' : '{}'}
+      </span>
+      {isExpanded && (
+        <div>
+          {Object.entries(data).map(([key, value]) => (
+            <div key={key}>
+              <span className="text-blue-500">{isArray ? '' : `"${key}": `}</span>
+              <JSONTree data={value} indent={indent + 1} />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export function JSONViewerForm() {
   const [input, setInput] = useState("")
-  const [jsonData, setJsonData] = useState<any>(null)
+  const [jsonData, setJsonData] = useState<JSONValue | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   const handleView = () => {
@@ -34,11 +62,14 @@ export default function JSONViewerForm() {
       />
       <Button onClick={handleView} className="w-full">View JSON</Button>
       {error && (
-        <div className="text-red-500 mt-2">{error}</div>
+        <Alert variant="destructive">
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
       )}
       {jsonData && (
-        <div className="border rounded-md p-4 bg-background">
-          <ReactJson src={jsonData} theme="twilight" />
+        <div className="border rounded-md p-4 bg-background overflow-auto max-h-96">
+          <JSONTree data={jsonData} />
         </div>
       )}
     </div>
