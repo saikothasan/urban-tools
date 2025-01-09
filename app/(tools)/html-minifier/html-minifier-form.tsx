@@ -16,7 +16,7 @@ export function HTMLMinifierForm() {
       .replace(/>\s+</g, '><')
     
     if (removeComments) {
-      minified = minified.replace(/<!--.*?-->/gs, '')
+      minified = minified.replace(/<!--[\s\S]*?-->/g, '')
     }
     
     setOutput(minified.trim())
@@ -35,7 +35,7 @@ export function HTMLMinifierForm() {
         <Checkbox
           id="removeComments"
           checked={removeComments}
-          onCheckedChange={(checked) => setRemoveComments(checked as boolean)}
+          onCheckedChange={(checked) => setRemoveComments(checked === true)}
         />
         <label htmlFor="removeComments">Remove comments</label>
       </div>
