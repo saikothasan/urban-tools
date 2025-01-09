@@ -16,7 +16,7 @@ export const metadata = {
   verification: {
     google: 'Sbfx36AwCwEHYjToOifCyG__NTdz9sPGgLnjuBHUQkM',
     yandex: 'YOUR_YANDEX_SITE_VERIFICATION_CODE',
-    bing: 'YOUR_BING_SITE_VERIFICATION_CODE',
+    bing: 'CB016FED5B8E40A292F2D7B22B869A8B',
   },
 }
 
