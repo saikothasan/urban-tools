@@ -65,7 +65,6 @@
     "xml-js": "latest",
     "papaparse": "latest",
     "json2csv": "latest",
-    "react-json-view": "latest"
   },
   "devDependencies": {
     "@types/node": "^20",
