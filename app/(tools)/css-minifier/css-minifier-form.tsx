@@ -33,7 +33,7 @@ export function CSSMinifierForm() {
         <Checkbox
           id="removeComments"
           checked={removeComments}
-          onCheckedChange={(checked) => setRemoveComments(checked)}
+          onCheckedChange={(checked) => setRemoveComments(checked === true)}
         />
         <label htmlFor="removeComments">Remove comments</label>
       </div>
