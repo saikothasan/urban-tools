@@ -20,7 +20,7 @@ export function CSVToJSONForm() {
           setOutput(JSON.stringify(results.data, null, 2))
           setError(null)
         },
-        error: (error) => {
+        error: (error: Papa.ParseError) => {
           setError(`Error parsing CSV: ${error.message}`)
           setOutput("")
         }
@@ -44,7 +44,7 @@ export function CSVToJSONForm() {
         <Checkbox
           id="hasHeader"
           checked={hasHeader}
-          onCheckedChange={(checked) => setHasHeader(checked as boolean)}
+          onCheckedChange={(checked) => setHasHeader(checked === true)}
         />
         <label htmlFor="hasHeader">CSV has header row</label>
       </div>
