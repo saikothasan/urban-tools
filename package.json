@@ -64,7 +64,7 @@
     "qrcode": "latest",
     "xml-js": "latest",
     "papaparse": "latest",
-    "json2csv": "latest",
+    "json2csv": "latest"
   },
   "devDependencies": {
     "@types/node": "^20",
