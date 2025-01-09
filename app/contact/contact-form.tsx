@@ -23,10 +23,10 @@ export function ContactForm() {
 
     try {
       const result = await emailjs.sendForm(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        'service_xag5ohe',
+        'saikothsan',
         formRef.current!,
-        'YOUR_PUBLIC_KEY'
+        'nhclsi_h_X-rEJGTq'
       )
 
       console.log(result.text)
