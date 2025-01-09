@@ -15,7 +15,7 @@ export const metadata = {
   description: 'A collection of useful online tools for developers',
   verification: {
     google: 'Sbfx36AwCwEHYjToOifCyG__NTdz9sPGgLnjuBHUQkM',
-    yandex: 'YOUR_YANDEX_SITE_VERIFICATION_CODE',
+    yandex: '72904a48e4645a5f',
     bing: 'CB016FED5B8E40A292F2D7B22B869A8B',
   },
 }
