@@ -100,6 +100,7 @@ declare module 'react-json-editor-ajrm/locale/en' {
       noFollowingSemicolon: string;
       missingAfterKey: string;
     };
+    noTrailingOrLeadingComma: string;
   };
   export default locale;
 }
