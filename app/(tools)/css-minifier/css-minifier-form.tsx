@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
-import { CheckedState } from "@/components/ui/checkbox"
 
 export function CSSMinifierForm() {
   const [input, setInput] = useState("")
@@ -34,7 +33,7 @@ export function CSSMinifierForm() {
         <Checkbox
           id="removeComments"
           checked={removeComments}
-          onCheckedChange={(checked: CheckedState) => setRemoveComments(checked as boolean)}
+          onCheckedChange={(checked) => setRemoveComments(checked)}
         />
         <label htmlFor="removeComments">Remove comments</label>
       </div>
