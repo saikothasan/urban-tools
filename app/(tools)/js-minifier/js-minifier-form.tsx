@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { minify, MinifyOptions } from 'terser'
+import * as Terser from 'terser'
 
 export function JSMinifierForm() {
   const [input, setInput] = useState("")
@@ -12,7 +12,7 @@ export function JSMinifierForm() {
 
   const handleMinify = async () => {
     try {
-      const options: MinifyOptions = {
+      const result = await Terser.minify(input, {
         mangle: true,
         compress: {
           dead_code: true,
@@ -28,13 +28,15 @@ export function JSMinifierForm() {
           if_return: true,
           join_vars: true,
           side_effects: true,
-          warnings: false,
         },
-      }
+      })
 
-      const result = await minify(input, options)
-      setOutput(result.code || "")
-      setError(null)
+      if (result.code) {
+        setOutput(result.code)
+        setError(null)
+      } else {
+        throw new Error("Minification resulted in empty code")
+      }
     } catch (err) {
       setError("Error: Invalid JavaScript or minification failed")
       setOutput("")
